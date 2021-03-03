@@ -53,7 +53,7 @@ namespace CaptchaBot.Api.Workers
                 await _telegramBot.DeleteMessageAsync(newUser.ChatId, newUser.JoinMessageId);
                 _userService.Remove(newUser);
 
-                _logger.LogInformation($"Пользователь {newUser.UserId} with name {newUser.PrettyUserName} был забанен после {_settings.ProcessEventTimeout.ToString()} ожидания.");
+                _logger.LogInformation($"Пользователь {newUser.UserId} с именем {newUser.PrettyUserName} был забанен после {_settings.ProcessEventTimeout.ToString()} ожидания.");
             }
         }
     }
