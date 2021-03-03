@@ -44,11 +44,12 @@ namespace CaptchaBot.Api.Workers
 
         private async Task BanSlowUsers()
         {
+            var banTime = DateTime.Now + _settings.BanTime;
             foreach (var newUser in _userService
                 .GetAll()
                 .Where(x => DateTimeOffset.Now - x.JoinDateTime > _settings.ProcessEventTimeout))
             {
-                await _telegramBot.KickChatMemberAsync(newUser.ChatId, (int) newUser.UserId, DateTime.Now.AddDays(1));
+                await _telegramBot.KickChatMemberAsync(newUser.ChatId, (int) newUser.UserId, banTime);
                 await _telegramBot.DeleteMessageAsync(newUser.ChatId, newUser.InviteMessageId);
                 await _telegramBot.DeleteMessageAsync(newUser.ChatId, newUser.JoinMessageId);
                 _userService.Remove(newUser);

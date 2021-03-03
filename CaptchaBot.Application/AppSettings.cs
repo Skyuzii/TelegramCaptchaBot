@@ -24,5 +24,10 @@ namespace CaptchaBot.Application
         /// Время на разгадывание капчи
         /// </summary>
         public TimeSpan ProcessEventTimeout { get; set; } = TimeSpan.FromMinutes(1);
+        
+        /// <summary>
+        /// Время бана
+        /// </summary>
+        public TimeSpan BanTime { get; set; } = TimeSpan.FromDays(1);
     }
 }
